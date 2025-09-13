@@ -1,9 +1,8 @@
-require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
 const axios = require('axios');
-
 const { DISCORD_BOT_TOKEN, TARGET_CHANNEL_ID } = process.env;
-const base_url="http://localhost:2137/api/"
+
+const base_url="http://server:2137/api/"
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -15,7 +14,7 @@ function transformData(response) {
     const data = response.data;
   return data.map(item => {
     return `\`\`\`
-id: ${item.id}
+id: ${item.id}  
 color: ${item.color}
 user: ${item.user}
 tekst: ${item.text}\`\`\`
@@ -28,8 +27,6 @@ client.once('ready', () => {
 
 client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return;
-
-
     if (interaction.channelId !== TARGET_CHANNEL_ID) {
         return
     }
@@ -37,14 +34,16 @@ client.on('interactionCreate', async interaction => {
     const { commandName } = interaction;
 
     if (commandName === 'get') {
+
         const config = {
                 method: "get",
                 url: base_url + "messages"
             };
         await interaction.deferReply()
         const response = await axios(config);
+
         let text = transformData(response)
-        if(text.length < 2){
+        if(text.length < 1){
             text = "puste jest"
         }
         await interaction.editReply(`${text}`);
@@ -86,7 +85,6 @@ tekst: ${response.data.text}\`\`\`
         try{
             await interaction.deferReply()
             const response = await axios(config);
-            console.log(response)
             await interaction.editReply(`${response.data}`);
         } catch (error) {
             console.error(error);

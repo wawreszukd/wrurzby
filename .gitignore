@@ -1,3 +1,4 @@
 wrurzkowywidzet
 discord-bot/node_modules
-discord-bot/node_modules/.env
+discord-bot/.env
+discord-bot/deploy.js
