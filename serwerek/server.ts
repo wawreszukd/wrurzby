@@ -88,7 +88,7 @@ const handler = async (req: Request): Promise<Response> => {
             });
         }
     }
-     if (path == "/js" && method == "GET") {
+     if (path == "/widget/js" && method == "GET") {
         const filePath = new URL("assets/index-CLccd7x_.js", import.meta.url);
         try {
             const file = await Deno.readFile(filePath);
@@ -102,7 +102,7 @@ const handler = async (req: Request): Promise<Response> => {
             });
         }
      }
-      if (path == "/css" && method == "GET") {
+      if (path == "/widget/css" && method == "GET") {
          const filePath = new URL("assets/index-DVo5xUOy.css", import.meta.url);
         try {
             const file = await Deno.readFile(filePath);
