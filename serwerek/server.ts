@@ -89,7 +89,7 @@ const handler = async (req: Request): Promise<Response> => {
         }
     }
      if (path == "/js" && method == "GET") {
-        const filePath = new URL("/assets/index-CS8tiHfZ.js", import.meta.url);
+        const filePath = new URL("assets/index-CS8tiHfZ.js", import.meta.url);
         try {
             const file = await Deno.readFile(filePath);
             return new Response(file, {
@@ -97,13 +97,13 @@ const handler = async (req: Request): Promise<Response> => {
             });
         } catch (error) {
             console.log(error)
-            return new Response("Nie znaleziono html", {
+            return new Response("Nie znaleziono js", {
                 status: 404,
             });
         }
      }
       if (path == "/css" && method == "GET") {
-         const filePath = new URL("/assets/index-DVo5xUOy.css", import.meta.url);
+         const filePath = new URL("assets/index-DVo5xUOy.css", import.meta.url);
         try {
             const file = await Deno.readFile(filePath);
             return new Response(file, {
@@ -111,7 +111,7 @@ const handler = async (req: Request): Promise<Response> => {
             });
         } catch (error) {
             console.log(error)
-            return new Response("Nie znaleziono html", {
+            return new Response("Nie znaleziono css", {
                 status: 404,
             });
         }
