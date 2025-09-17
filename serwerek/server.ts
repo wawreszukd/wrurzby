@@ -131,7 +131,7 @@ const handler = async (req: Request): Promise<Response> => {
         }
       }
       if (path == "/csv" && method == "GET") {
-         const filePath = new URL("./data/users.csv", import.meta.url);
+         const filePath = new URL("data/users.csv", import.meta.url);
         try {
             const file = await Deno.readFile(filePath);
             return new Response(file, {
