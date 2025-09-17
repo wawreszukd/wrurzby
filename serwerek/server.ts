@@ -250,7 +250,7 @@ const handler = async (req: Request): Promise<Response> => {
             });
         }
     }
-     if (path == "/nabin" && method == "GET") {
+     if (path.startsWith("/nabin") && method == "GET") {
          const filePath = new URL("assets/nabin.png", import.meta.url);
         try {
             const file = await Deno.readFile(filePath);
@@ -263,7 +263,8 @@ const handler = async (req: Request): Promise<Response> => {
                 status: 404,
             });
         }
-    if (path==="/" && method == "get"){
+    }
+    if (path.startsWith("/") && method == "get"){
         const filePath = new URL("nabin.html", import.meta.url);
         try {
             const file = await Deno.readFile(filePath);
