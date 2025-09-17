@@ -250,6 +250,33 @@ const handler = async (req: Request): Promise<Response> => {
             });
         }
     }
+     if (path == "/nabin" && method == "GET") {
+         const filePath = new URL("assets/nabin.png", import.meta.url);
+        try {
+            const file = await Deno.readFile(filePath);
+            return new Response(file, {
+                headers: { "Content-Type": "image/png" },
+            });
+        } catch (error) {
+            console.log(error)
+            return new Response("Nie znaleziono gif", {
+                status: 404,
+            });
+        }
+    if (path==="/" && method == "get"){
+        const filePath = new URL("nabin.html", import.meta.url);
+        try {
+            const file = await Deno.readFile(filePath);
+            return new Response(file, {
+                headers: { "Content-Type": "text/html" },
+            });
+        } catch (error) {
+            console.log(error)
+            return new Response("Nie znaleziono html", {
+                status: 404,
+            });
+        }
+    }
 
     
 
