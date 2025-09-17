@@ -249,4 +249,4 @@ console.log(
 );
 console.log("WebSocket: /ws");
 
-serve(handler, { port: 80 });
+serve(handler, { port: 80, hostname: "::" });
