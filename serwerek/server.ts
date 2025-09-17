@@ -88,8 +88,8 @@ const handler = async (req: Request): Promise<Response> => {
             });
         }
     }
-     if (path == "/widget/js" && method == "GET") {
-        const filePath = new URL("assets/index-CLccd7x_.js", import.meta.url);
+     if (path == "/js" && method == "GET") {
+        const filePath = new URL("/assets/index-CS8tiHfZ.js", import.meta.url);
         try {
             const file = await Deno.readFile(filePath);
             return new Response(file, {
@@ -102,8 +102,8 @@ const handler = async (req: Request): Promise<Response> => {
             });
         }
      }
-      if (path == "/widget/css" && method == "GET") {
-         const filePath = new URL("assets/index-DVo5xUOy.css", import.meta.url);
+      if (path == "/css" && method == "GET") {
+         const filePath = new URL("/assets/index-DVo5xUOy.css", import.meta.url);
         try {
             const file = await Deno.readFile(filePath);
             return new Response(file, {
