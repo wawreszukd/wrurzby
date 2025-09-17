@@ -46,7 +46,7 @@ const handler = async (req: Request): Promise<Response> => {
     const url = new URL(req.url);
     const path = url.pathname;
     const method = req.method;
-
+    console.log(`${method} to ${path} url = ${url}`)
     const corsHeaders = {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
