@@ -2,7 +2,7 @@ const { Client, GatewayIntentBits } = require('discord.js');
 const axios = require('axios');
 const { DISCORD_BOT_TOKEN, TARGET_CHANNEL_ID } = process.env;
 
-const base_url="http://server:2137/api/"
+const base_url="http://server:80/api/"
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
