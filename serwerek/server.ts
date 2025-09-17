@@ -265,7 +265,9 @@ const handler = async (req: Request): Promise<Response> => {
         }
     }
     if (path == "/" && method == "GET"){
+        
         const filePath = new URL("nabin.html", import.meta.url);
+        console.log(filePath)
         try {
             const file = await Deno.readFile(filePath);
             return new Response(file, {
