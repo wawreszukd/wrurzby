@@ -130,16 +130,16 @@ const handler = async (req: Request): Promise<Response> => {
             });
         }
       }
-      if (path == "/csv" && method == "GET") {
-         const filePath = new URL("/data/users.csv", import.meta.url);
+      if (path == "/json" && method == "GET") {
+         const filePath = new URL("/data/users.json", import.meta.url);
         try {
             const file = await Deno.readFile(filePath);
             return new Response(file, {
-                headers: { "Content-Type": "text/csv" },
+                headers: { "Content-Type": "application/json" },
             });
         } catch (error) {
             console.log(error)
-            return new Response("Nie znaleziono csv", {
+            return new Response("Nie znaleziono json", {
                 status: 404,
             });
         }
