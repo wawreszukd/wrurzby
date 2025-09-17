@@ -125,12 +125,25 @@ const handler = async (req: Request): Promise<Response> => {
             });
         } catch (error) {
             console.log(error)
-            return new Response("Nie znaleziono html", {
+            return new Response("Nie znaleziono gif", {
                 status: 404,
             });
         }
       }
-
+      if (path == "/csv" && method == "GET") {
+         const filePath = new URL("./data/users.csv", import.meta.url);
+        try {
+            const file = await Deno.readFile(filePath);
+            return new Response(file, {
+                headers: { "Content-Type": "text/csv" },
+            });
+        } catch (error) {
+            console.log(error)
+            return new Response("Nie znaleziono csv", {
+                status: 404,
+            });
+        }
+      }
     if (path === "/api/messages" && method === "POST") {
         try {
             const { user, text } = await req.json();
