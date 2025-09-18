@@ -41,11 +41,11 @@ const broadcastMessages = (): void => {
     });
 };
 
-const handler = async (req: Request, conn): Promise<Response> => {
+const handler = async (req: Request): Promise<Response> => {
     const url = new URL(req.url);
     const path = url.pathname;
     const method = req.method;
-    console.log(`${method} to ${path} url = ${url}`)
+    console.log(`${method} to ${path}`)
     const corsHeaders = {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
@@ -146,8 +146,7 @@ const handler = async (req: Request, conn): Promise<Response> => {
     const authHeader = req.headers.get("Authorization");
     const [type, token] = authHeader!.split(" ");
     const TOKEN = Deno.env.get('TOKEN')
-    console.log(token, TOKEN, type)
-    if(type !== "Bearer" || token !== TOKEN){
+    if(type == "Bearer" || token == TOKEN){
     if (path === "/api/messages" && method === "POST") {
         try {
             const { user, text } = await req.json();
