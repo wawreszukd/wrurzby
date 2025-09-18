@@ -146,6 +146,7 @@ const handler = async (req: Request, conn): Promise<Response> => {
     const authHeader = req.headers.get("Authorization");
     const [type, token] = authHeader!.split(" ");
     const TOKEN = Deno.env.get('TOKEN')
+    console.log(token, TOKEN, type)
     if(type !== "Bearer" || token !== TOKEN){
     if (path === "/api/messages" && method === "POST") {
         try {
