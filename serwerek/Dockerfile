@@ -6,4 +6,4 @@ COPY . .
 
 EXPOSE 2137
 
-CMD ["deno", "run", "--allow-net", "--allow-read","--enable-env", "server.ts"]
+CMD ["deno", "run", "--allow-net", "--allow-read","--allow-env", "server.ts"]
