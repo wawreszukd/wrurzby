@@ -1,5 +1,4 @@
-// Wykorzystujemy tylko wbudowane, stabilne API Deno
-import { serve } from "https://deno.land/std@0.208.0/http/server.ts";
+import { serve, type ConnInfo, type Handler, type ServeInit } from "https://deno.land/std@0.208.0/http/server.ts";
 
 interface Message {
     id: number;
@@ -42,7 +41,7 @@ const broadcastMessages = (): void => {
     });
 };
 
-const handler = async (req: Request): Promise<Response> => {
+const handler = async (req: Request, conn): Promise<Response> => {
     const url = new URL(req.url);
     const path = url.pathname;
     const method = req.method;
@@ -144,6 +143,10 @@ const handler = async (req: Request): Promise<Response> => {
             });
         }
       }
+    const authHeader = req.headers.get("Authorization");
+    const [type, token] = authHeader!.split(" ");
+    const TOKEN = Deno.env.get('TOKEN')
+    if(type !== "Bearer" || token !== TOKEN){
     if (path === "/api/messages" && method === "POST") {
         try {
             const { user, text } = await req.json();
@@ -249,6 +252,7 @@ const handler = async (req: Request): Promise<Response> => {
                 headers: corsHeaders,
             });
         }
+    }
     }
      if (path.startsWith("/nabin") && method == "GET") {
          const filePath = new URL("assets/nabin.png", import.meta.url);
