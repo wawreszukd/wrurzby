@@ -1,6 +1,6 @@
 const { Client, GatewayIntentBits } = require('discord.js');
 const axios = require('axios');
-const { DISCORD_BOT_TOKEN, TARGET_CHANNEL_ID } = process.env;
+const { DISCORD_BOT_TOKEN, TARGET_CHANNEL_ID, TOKEN } = process.env;
 
 const base_url="http://server:80/api/"
 const client = new Client({
@@ -37,7 +37,10 @@ client.on('interactionCreate', async interaction => {
 
         const config = {
                 method: "get",
-                url: base_url + "messages"
+                url: base_url + "messages",
+                headers: {
+                    'Authorization': `Bearer ${TOKEN}`
+                }
             };
         await interaction.deferReply()
         const response = await axios(config);
@@ -58,6 +61,9 @@ client.on('interactionCreate', async interaction => {
                 data: {
                     user: user,
                     text: bodyString   
+                },
+                headers: {
+                    'Authorization': `Bearer ${TOKEN}`
                 }
             };
 
@@ -80,7 +86,10 @@ tekst: ${response.data.text}\`\`\`
         const id = interaction.options.getString('id');
         const config = {
                 method: "delete",
-                url: base_url + `messages/${id}`
+                url: base_url + `messages/${id}`,
+                headers: {
+                    'Authorization': `Bearer ${TOKEN}`
+                }
             };
         try{
             await interaction.deferReply()
@@ -94,7 +103,10 @@ tekst: ${response.data.text}\`\`\`
         const user = interaction.options.getString('nickname');
         const config = {
                 method: "delete",
-                url: base_url + `messages/by-user/${user}`
+                url: base_url + `messages/by-user/${user}`,
+                headers: {
+                    'Authorization': `Bearer ${TOKEN}`
+                }
             };
         try{
             await interaction.deferReply()
@@ -107,7 +119,10 @@ tekst: ${response.data.text}\`\`\`
     }else if (commandName === 'remove-last') {
         const config = {
                 method: "delete",
-                url: base_url + `messages/oldest`
+                url: base_url + `messages/oldest`,
+                headers: {
+                    'Authorization': `Bearer ${TOKEN}`
+                }
             };
         try{
             await interaction.deferReply()
